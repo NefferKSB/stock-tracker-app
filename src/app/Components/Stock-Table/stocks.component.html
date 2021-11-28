@@ -1,8 +1,20 @@
-<h2>
-  This is the list of Top Stocks
-</h2>
-<ul *ngFor="let stock of stocks">
-  <li>
-      {{stock.name}} which has a value of {{stock.value}}
-  </li>
-</ul>
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+  <!--- Note that these columns can be defined in any order.
+        The actual rendered columns are set as a property on the row definition" -->
+
+  <!-- Position Column -->
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef> Name </th>
+    <td mat-cell *matCellDef="let stock"> {{stock.name}} </td>
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="value">
+    <th mat-header-cell *matHeaderCellDef> Value </th>
+    <td mat-cell *matCellDef="let stock"> {{stock.value}} </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
