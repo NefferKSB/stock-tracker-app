@@ -1,11 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { StockDataService } from 'src/app/Services/Stock-Data/stock-data.service';
+import { StockDetails } from './stock-details';
 
-export interface StockData {
-  name: string;
-  value: number;
-}
-
-const STOCK_DATA: StockData[] = [
+const STOCK_DATA: StockDetails[] = [
   {name: 'Stock 1', value: 100},
   {name: 'Stock 2', value: 200},
   {name: 'Stock 3', value: 300}
@@ -16,7 +13,20 @@ const STOCK_DATA: StockData[] = [
   templateUrl: './stocks.component.html',
   styleUrls: ['./stocks.component.css']
 })
-export class StocksComponent {
+export class StocksComponent implements OnInit {
   displayedColumns: string[] = ['name', 'value'];
   dataSource = STOCK_DATA;
+  stock: any;
+
+  constructor(private api: StockDataService) {}
+
+  ngOnInit() {
+    this.api.getStockData();
+  }
+
+  getStockData() {
+    this.api.getStockData()
+    .subscribe(stockPayload => this.stock = stockPayload);
+    console.log(this.stock);
+  }
 }
