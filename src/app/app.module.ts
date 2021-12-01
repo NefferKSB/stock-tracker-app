@@ -5,6 +5,7 @@ import { MatTableModule } from '@angular/material/table';
 
 import { AppComponent } from './app.component';
 import { StocksComponent } from './Components/Stock-Table/stocks.component';
+import { StockOpenCloseDetails } from './Components/Stock-Table/stock-open-close-details';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,7 @@ import { StocksComponent } from './Components/Stock-Table/stocks.component';
     HttpClientModule,
     MatTableModule
   ],
-  providers: [],
+  providers: [StockOpenCloseDetails],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

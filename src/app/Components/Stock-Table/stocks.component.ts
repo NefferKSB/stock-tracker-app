@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { StockDataService } from 'src/app/Services/Stock-Data/stock-data.service';
-import { StockDetails } from './stock-details';
+import { StockOpenCloseDetails } from './stock-open-close-details';
+import { map, tap } from 'rxjs';
 
-const STOCK_DATA: StockDetails[] = [
-  {name: 'Stock 1', value: 100},
-  {name: 'Stock 2', value: 200},
-  {name: 'Stock 3', value: 300}
+let stockTickers: String[] = [
+  'MSFT', 'KO', 'MMM', 'LOW', 'AMZN'
 ];
+
+let STOCK_DATA: StockOpenCloseDetails[] = [];
 
 @Component({
   selector: 'app-stocks',
@@ -14,19 +15,35 @@ const STOCK_DATA: StockDetails[] = [
   styleUrls: ['./stocks.component.css']
 })
 export class StocksComponent implements OnInit {
-  displayedColumns: string[] = ['name', 'value'];
-  dataSource = STOCK_DATA;
   stock: any;
 
-  constructor(private api: StockDataService) {}
+  constructor(private api: StockDataService, private openCloseDataObj: StockOpenCloseDetails) {}
 
   ngOnInit() {
-    this.api.getStockData();
+    stockTickers.forEach(stockSymbol => {
+      this.api.getStockOpenCloseData(stockSymbol)
+      .pipe(
+        map(response => console.log("response is", response.data)),
+        tap(user => console.log("users array", user))
+      )
+      .subscribe(stockPayload => {
+        this.stock = stockPayload;
+        console.log('Stock info for ' + stockSymbol + ' is ' + JSON.stringify(this.stock.symbol));
+        // this.openCloseDataObj.ticker = this.stock.symbol;
+        // this.openCloseDataObj.open = parseFloat(this.stock.open);
+        // this.openCloseDataObj.close = parseFloat(this.stock.close);
+
+        this.openCloseDataObj.ticker = 'test';
+        this.openCloseDataObj.open = 10;
+        this.openCloseDataObj.close = 20;
+
+        //console.log(JSON.stringify(this.openCloseDataObj));
+
+        STOCK_DATA.push(this.openCloseDataObj);
+      });
+    })
   }
 
-  getStockData() {
-    this.api.getStockData()
-    .subscribe(stockPayload => this.stock = stockPayload);
-    console.log(this.stock);
-  }
+  displayedColumns: string[] = ['ticker', 'open', 'close'];
+  dataSource = STOCK_DATA;
 }
