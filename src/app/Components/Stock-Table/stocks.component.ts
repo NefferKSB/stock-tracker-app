@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { StockDataService } from 'src/app/Services/Stock-Data/stock-data.service';
 import { StockOpenCloseDetails } from './stock-open-close-details';
-import { map, tap } from 'rxjs';
+import {  map, tap } from 'rxjs';
 
 let stockTickers: String[] = [
   'MSFT', 'KO', 'MMM', 'LOW', 'AMZN'
 ];
 
-let STOCK_DATA: StockOpenCloseDetails[] = [];
+let DAILY_STOCK_DATA: StockOpenCloseDetails[] = [];
 
 @Component({
   selector: 'app-stocks',
@@ -15,35 +15,43 @@ let STOCK_DATA: StockOpenCloseDetails[] = [];
   styleUrls: ['./stocks.component.css']
 })
 export class StocksComponent implements OnInit {
-  stock: any;
+  displayedColumns: string[] = ['ticker', 'open', 'close'];
+  dailyStocksArr: any[] = [];
+  dailyStockData: any = {};
+  dataSource:any;
+  payload: any;
 
-  constructor(private api: StockDataService, private openCloseDataObj: StockOpenCloseDetails) {}
+  constructor(private api: StockDataService) {}
 
   ngOnInit() {
     stockTickers.forEach(stockSymbol => {
       this.api.getStockOpenCloseData(stockSymbol)
       .pipe(
-        map(response => console.log("response is", response.data)),
-        tap(user => console.log("users array", user))
+      //  map(response => console.log(response.data)),
+        tap(stockPayload => {
+          //console.log('Stocks Array', stockPayload)
+          this.dailyStockData = new StockOpenCloseDetails;
+          this.dailyStockData.ticker = stockPayload.symbol;
+          this.dailyStockData.open = parseFloat(stockPayload.open);
+          this.dailyStockData.close = parseFloat(stockPayload.close);
+
+          this.dailyStocksArr.push(this.dailyStockData);
+        })
       )
       .subscribe(stockPayload => {
-        this.stock = stockPayload;
-        console.log('Stock info for ' + stockSymbol + ' is ' + JSON.stringify(this.stock.symbol));
-        // this.openCloseDataObj.ticker = this.stock.symbol;
-        // this.openCloseDataObj.open = parseFloat(this.stock.open);
-        // this.openCloseDataObj.close = parseFloat(this.stock.close);
+        // this.payload = stockPayload;
 
-        this.openCloseDataObj.ticker = 'test';
-        this.openCloseDataObj.open = 10;
-        this.openCloseDataObj.close = 20;
+        // //this.dailyStockData = new StockOpenCloseDetails;
+        // this.dailyStockData.ticker = this.payload.symbol;
+        // this.dailyStockData.open = parseFloat(this.payload.open);
+        // this.dailyStockData.close = parseFloat(this.payload.close);
 
-        //console.log(JSON.stringify(this.openCloseDataObj));
-
-        STOCK_DATA.push(this.openCloseDataObj);
+        // console.log('Stock info for ' + stockSymbol + ' is ' + JSON.stringify(this.dailyStockData));
+        // this.dailyStocksArr.push(this.dailyStockData);
       });
     })
+    this.dataSource = this.dailyStocksArr;
+    console.log(this.dailyStocksArr);
+    //console.log(this.dataSource);
   }
-
-  displayedColumns: string[] = ['ticker', 'open', 'close'];
-  dataSource = STOCK_DATA;
 }

@@ -1,14 +1,16 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { StockOpenCloseDetails } from 'src/app/Components/Stock-Table/stock-open-close-details';
 
 @Injectable({
   providedIn: 'root'
 })
 export class StockDataService {
+
   private endpoint = '';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private dailyStockData: StockOpenCloseDetails) { }
 
   getStockOpenCloseData(symbol: String): Observable<any> {
     this.endpoint = 'https://api.polygon.io/v1/open-close/' + symbol +'/2020-10-14?adjusted=true&apiKey=uLLH_N__TQuHqpD9LWYZEa_rUG4u2tG8';
