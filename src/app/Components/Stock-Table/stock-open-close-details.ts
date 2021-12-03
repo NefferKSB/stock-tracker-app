@@ -1,5 +1,12 @@
-export class StockOpenCloseDetails {
-  ticker: string | undefined;
-  open: number | undefined;
-  close: number | undefined;
+export interface StockOpenCloseDetails {
+  afterHours: number;
+  close: number;
+  from: string;
+  high: number;
+  low: number;
+  open: number;
+  preMarket: number;
+  status: string;
+  symbol: string;
+  volume: number;
 }
