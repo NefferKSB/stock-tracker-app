@@ -1,19 +1,23 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { StockDataService } from 'src/app/Services/Stock-Data/stock-data.service';
 
 @Component({
   selector: 'stock-info-card',
   templateUrl: './stock-info-card.component.html',
   styleUrls: ['./stock-info-card.component.css']
 })
-export class StockInfoCardComponent implements OnInit {
+export class StockInfoCardComponent {
 
   longText = `The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog
   from Japan. A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was
   originally bred for hunting.`;
 
-  constructor() { }
+  constructor(private api: StockDataService) { }
 
-  ngOnInit(): void {
+  getTickerInfo() {
+    this.api.getTickerInfo('MSFT')
+    .subscribe(response => {
+      console.log(JSON.stringify(response));
+    })
   }
-
 }
