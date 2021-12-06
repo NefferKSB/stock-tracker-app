@@ -8,7 +8,7 @@ import { TickerDetails } from './ticker-details';
   styleUrls: ['./stock-info-card.component.css']
 })
 export class StockInfoCardComponent implements OnInit {
-  value = 'Clear me';
+  value = 'Ex: MSFT';
   longText = `The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog
   from Japan. A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was
   originally bred for hunting.`;
@@ -20,13 +20,24 @@ export class StockInfoCardComponent implements OnInit {
   ngOnInit() {}
 
   getTickerInfo(tickerSymbol: String) {
-    this.api.getTickerInfo(tickerSymbol)
-    .subscribe(response => {
-      this.tickerInfo = response.results[0];
-      this.getDailyStockValue(tickerSymbol);
-      console.log(JSON.stringify(this.tickerInfo));
-    })
+    if(tickerSymbol.includes('Ex:')) {
+      let parsedSymbol = tickerSymbol.split('Ex: ');
+      this.api.getTickerInfo(parsedSymbol[1])
+      .subscribe(response => {
+        this.tickerInfo = response.results[0];
+        this.getDailyStockValue(tickerSymbol);
+        console.log(JSON.stringify(this.tickerInfo));
+      })
+    }
 
+    else {
+      this.api.getTickerInfo(tickerSymbol)
+      .subscribe(response => {
+        this.tickerInfo = response.results[0];
+        this.getDailyStockValue(tickerSymbol);
+        console.log(JSON.stringify(this.tickerInfo));
+      })
+    }
   }
 
   getDailyStockValue(tickerSymbol: String) {
