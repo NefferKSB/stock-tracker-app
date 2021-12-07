@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { StockOpenCloseDetails } from 'src/app/Components/Stock-Table/stock-open-close-details';
-import { TickerDetails } from 'src/app/Components/Stock-Card/ticker-details';
 
 @Injectable({
   providedIn: 'root'
