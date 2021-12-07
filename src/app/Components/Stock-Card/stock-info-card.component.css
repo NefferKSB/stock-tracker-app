@@ -2,7 +2,27 @@
   max-width: 400px;
   margin-top: 20px;
   margin-bottom: 20px;
+  padding: 0px;
 }
 .example-form-field {
   width: 200px;
 }
+.stock-card-h3 {
+  font-weight: 500;
+  margin-bottom: 0px;
+}
+.card-header {
+  background-color: #edeae1;
+  padding-top: 16px;
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+}
+.card-content {
+  background-color: #fcfbf7;
+  padding: 16px;
+}
+.card-avatar {
+  margin-left: 5px;
+}
+
+

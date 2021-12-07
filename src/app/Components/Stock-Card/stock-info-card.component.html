@@ -8,13 +8,18 @@
 
 <button [disabled]="!value" (click)="getTickerInfo(value)" mat-raised-button color="accent">Get Stock Info</button>
 <mat-card *ngIf="tickerInfo.name != undefined" class="example-card">
-  <mat-card-title>{{tickerInfo.name}}</mat-card-title>
-  <mat-card-subtitle>{{tickerInfo.ticker}}</mat-card-subtitle>
-  <mat-card-content>
+  <mat-card-header class="card-header">
+    <mat-card-title>{{tickerInfo.name}}</mat-card-title>
+    <mat-card-subtitle>{{tickerInfo.ticker}}</mat-card-subtitle>
+    <img class="card-avatar" mat-card-avatar src={{companyInfo.logo}}>
+  </mat-card-header>
+  <mat-card-content class="card-content">
+    <h3 class="stock-card-h3">Daily Open/Close Value:</h3>
     <p>
-      {{tickerInfo.name}}'s daily open stock value is: {{dailyTickerValue.open}}.<br/>
-      {{tickerInfo.name}}'s daily close stock value is: {{dailyTickerValue.close}}.
+      {{tickerInfo.name}}'s daily open stock value was: {{dailyTickerValue.open}} USD,
+      while it's daily close stock value was: {{dailyTickerValue.close}} USD.
     </p>
-    <p>{{longText}}</p>
+    <h3 class="stock-card-h3">Company Info:</h3>
+    <p>{{companyInfo.description}}</p>
   </mat-card-content>
 </mat-card>
