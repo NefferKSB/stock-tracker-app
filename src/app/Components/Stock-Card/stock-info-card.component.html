@@ -7,6 +7,7 @@
 </mat-form-field>
 
 <button [disabled]="!value" (click)="getTickerInfo(value)" mat-raised-button color="accent">Get Stock Info</button>
+<br/>
 <mat-card *ngIf="tickerInfo.name != undefined" class="example-card">
   <mat-card-header class="card-header">
     <mat-card-title>{{tickerInfo.name}}</mat-card-title>
@@ -21,5 +22,9 @@
     </p>
     <h3 class="stock-card-h3">Company Info:</h3>
     <p>{{companyInfo.description}}</p>
+    <h3 class="stock-card-h3">Sector / Industry:</h3>
+    <p>{{companyInfo.sector}} - {{companyInfo.industry}}</p>
+    <h3 class="stock-card-h3">Company Website:</h3>
+    <p><a href={{companyInfo.url}}>{{companyInfo.url}}</a></p>
   </mat-card-content>
 </mat-card>
