@@ -1,4 +1,4 @@
-export interface TickerDetails {
+export interface TickerResult {
   ticker: string;
   name: string;
   market: string;

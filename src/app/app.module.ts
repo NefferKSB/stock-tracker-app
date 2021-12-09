@@ -12,12 +12,14 @@ import { MatIconModule } from '@angular/material/icon';
 import { AppComponent } from './app.component';
 import { StocksComponent } from './Components/Stock-Table/stocks.component';
 import { StockInfoCardComponent } from './Components/Stock-Card/stock-info-card.component';
+import { StockCardGeneratorComponent } from './Components/Stock-Card-Generator/stock-card-generator.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     StocksComponent,
-    StockInfoCardComponent
+    StockInfoCardComponent,
+    StockCardGeneratorComponent
   ],
   imports: [
     BrowserModule,

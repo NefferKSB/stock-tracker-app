@@ -1,0 +1,30 @@
+export interface TickerDetails {
+  active: boolean;
+  bloomberg: string;
+  ceo: string;
+  cik: number;
+  country: string;
+  description: string;
+  employees: number;
+  exchange: string;
+  exchangeSymbol: string;
+  figi: string;
+  hq_address: string;
+  hq_country: string;
+  hq_state: string;
+  industry: string;
+  lei: string;
+  listdate: string;
+  logo: string;
+  marketcap: number;
+  name: string;
+  phone: string;
+  sector: string;
+  sic: number;
+  similar: [];
+  symbol: string;
+  tags: [];
+  type: string;
+  updated: string;
+  url: string;
+}
