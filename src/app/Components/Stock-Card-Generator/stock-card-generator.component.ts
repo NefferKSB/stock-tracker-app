@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { forkJoin } from 'rxjs';
 import { DailyOpenCloseDetails } from 'src/app/Interfaces/daily-open-close-details';
 import { StockCardDetails } from 'src/app/Interfaces/stock-card-details';
 import { TickerDetails } from 'src/app/Interfaces/ticker-details';
@@ -19,54 +20,44 @@ export class StockCardGeneratorComponent implements OnInit {
   dailyTickerValue: DailyOpenCloseDetails;
   companyInfo: TickerDetails;
 
-  constructor(private api: StockDataService) { }
+  constructor(private api: StockDataService) {}
 
   ngOnInit(): void {
     this.stockCards = [];
     this.tickerDetails = <StockCardDetails>{};
   }
 
-  addStockCard(tickerSymbol: String) {
+  generateStockCard(tickerSymbol: String) {
+    let openClose;
+    let tickerInfo;
+    let compDetails;
+
     if(tickerSymbol.includes('Ex:')) {
       let parsedSymbol = tickerSymbol.split('Ex: ');
-      this.api.getTickerInfo(parsedSymbol[1])
-      .subscribe(response => {
-        this.tickerInfo = response.results[0];
-        this.tickerDetails.ticker_result = this.tickerInfo;
-        this.getDailyStockValue(parsedSymbol[1]);
-        this.getCompanyInfo(parsedSymbol[1]);
-        //this.stockCards.push(tickerDetails);
-        console.log(JSON.stringify(this.tickerDetails));
-      })
-    }
+      openClose = this.api.getStockOpenCloseData(parsedSymbol[1]);
+      tickerInfo = this.api.getTickerInfo(parsedSymbol[1]);
+      compDetails = this.api.getStockCompanyDetails(parsedSymbol[1]);
 
+      forkJoin([openClose, tickerInfo, compDetails]).subscribe(result => {
+        this.tickerDetails.daily_open_close_details = result[0];
+        this.tickerDetails.ticker_result = result[1].results[0];
+        this.tickerDetails.ticker_details = result[2];
+        this.stockCards.push(this.tickerDetails);
+        console.log("in call " + this.stockCards[0].ticker_result);
+      });
+    }
     else {
-      this.api.getTickerInfo(tickerSymbol)
-      .subscribe(response => {
-        this.tickerInfo = response.results[0];
-        this.tickerDetails.ticker_result = this.tickerInfo;
-        this.getDailyStockValue(tickerSymbol);
-        this.getCompanyInfo(tickerSymbol);
-        //this.stockCards.push(tickerDetails);
-        //console.log(JSON.stringify(tickerDetails));
-      })
+      openClose = this.api.getStockOpenCloseData(tickerSymbol);
+      tickerInfo = this.api.getTickerInfo(tickerSymbol);
+      compDetails = this.api.getStockCompanyDetails(tickerSymbol);
+
+      forkJoin([openClose, tickerInfo, compDetails]).subscribe(result => {
+        this.tickerDetails.daily_open_close_details = result[0];
+        this.tickerDetails.ticker_result = result[1].results[0];
+        this.tickerDetails.ticker_details = result[2];
+        this.stockCards.push(this.tickerDetails);
+        console.log("in call 2 " + this.stockCards[0].ticker_result);
+      });
     }
-  }
-
-  getDailyStockValue(tickerSymbol: String) {
-    this.api.getStockOpenCloseData(tickerSymbol)
-    .subscribe(response => {
-      this.dailyTickerValue = response;
-      this.tickerDetails.daily_open_close_details = this.dailyTickerValue;
-    })
-  }
-
-  getCompanyInfo(tickerSymbol: String) {
-    this.api.getStockCompanyDetails(tickerSymbol)
-    .subscribe(response => {
-      this.companyInfo = response;
-      this.tickerDetails.ticker_details = this.companyInfo;
-      this.stockCards.push(this.tickerDetails);
-    })
   }
 }
