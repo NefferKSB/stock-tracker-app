@@ -42,9 +42,11 @@ export class StockCardGeneratorComponent implements OnInit {
         this.tickerDetails.daily_open_close_details = result[0];
         this.tickerDetails.ticker_result = result[1].results[0];
         this.tickerDetails.ticker_details = result[2];
-        this.stockCards.push(this.tickerDetails);
-        console.log("in call " + this.stockCards[0].ticker_result);
+        this.stockCards.push(Object.assign({},this.tickerDetails));
+        console.log("in call " + JSON.stringify(this.tickerDetails));
+        console.log("in call array is " + this.stockCards);
       });
+      //console.log("in call array is " + this.stockCards);
     }
     else {
       openClose = this.api.getStockOpenCloseData(tickerSymbol);
