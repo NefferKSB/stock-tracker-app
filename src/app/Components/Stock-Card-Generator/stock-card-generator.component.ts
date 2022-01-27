@@ -25,9 +25,10 @@ export class StockCardGeneratorComponent implements OnInit {
     let openClose;
     let tickerInfo;
     let compDetails;
+    let capTickerSymbol = tickerSymbol.toUpperCase();
 
-    if(tickerSymbol.includes('Ex:')) {
-      let parsedSymbol = tickerSymbol.split('Ex: ');
+    if(capTickerSymbol.includes('EX:')) {
+      let parsedSymbol = capTickerSymbol.split('EX: ');
       openClose = this.api.getStockOpenCloseData(parsedSymbol[1]);
       tickerInfo = this.api.getTickerInfo(parsedSymbol[1]);
       compDetails = this.api.getStockCompanyDetails(parsedSymbol[1]);
@@ -40,9 +41,9 @@ export class StockCardGeneratorComponent implements OnInit {
       });
     }
     else {
-      openClose = this.api.getStockOpenCloseData(tickerSymbol);
-      tickerInfo = this.api.getTickerInfo(tickerSymbol);
-      compDetails = this.api.getStockCompanyDetails(tickerSymbol);
+      openClose = this.api.getStockOpenCloseData(capTickerSymbol);
+      tickerInfo = this.api.getTickerInfo(capTickerSymbol);
+      compDetails = this.api.getStockCompanyDetails(capTickerSymbol);
 
       forkJoin([openClose, tickerInfo, compDetails]).subscribe(result => {
         this.tickerDetails.daily_open_close_details = result[0];
