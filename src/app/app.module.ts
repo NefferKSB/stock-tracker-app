@@ -13,6 +13,7 @@ import { AppComponent } from './app.component';
 import { StocksComponent } from './Components/Stock-Table/stocks.component';
 import { StockInfoCardComponent } from './Components/Stock-Card/stock-info-card.component';
 import { StockCardGeneratorComponent } from './Components/Stock-Card-Generator/stock-card-generator.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { StockCardGeneratorComponent } from './Components/Stock-Card-Generator/s
     MatInputModule,
     FormsModule,
     MatIconModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    FlexLayoutModule
   ],
   providers: [],
   bootstrap: [AppComponent]

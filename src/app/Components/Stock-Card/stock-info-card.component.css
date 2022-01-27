@@ -1,11 +1,8 @@
-.example-card {
+.stock-card {
   max-width: 400px;
   margin-top: 20px;
   margin-bottom: 20px;
   padding: 0px;
-}
-.example-form-field {
-  width: 200px;
 }
 .stock-card-h3 {
   font-weight: 500;

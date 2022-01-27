@@ -1,4 +1,4 @@
-<mat-form-field class="example-form-field" appearance="fill">
+<mat-form-field class="ticker-field" appearance="fill">
   <mat-label>Enter A Ticker Symbol</mat-label>
   <input matInput type="text" [(ngModel)]="value">
   <button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
@@ -8,4 +8,10 @@
 
 <button [disabled]="!value" (click)="generateStockCard(value)" mat-raised-button color="accent">Get Stock Info</button>
 <br/>
-<stock-info-card *ngFor="let stockCard of stockCards" [stockCardDetails]="stockCard"></stock-info-card>
+<div>
+  <div fxLayout="row wrap" fxLayoutGap="16px grid">
+    <div fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let stockCard of stockCards">
+      <stock-info-card [stockCardDetails]="stockCard"></stock-info-card>
+    </div>
+  </div>
+</div>

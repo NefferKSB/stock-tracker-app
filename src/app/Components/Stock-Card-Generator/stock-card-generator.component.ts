@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { forkJoin } from 'rxjs';
-import { DailyOpenCloseDetails } from 'src/app/Interfaces/daily-open-close-details';
 import { StockCardDetails } from 'src/app/Interfaces/stock-card-details';
-import { TickerDetails } from 'src/app/Interfaces/ticker-details';
-import { TickerResult } from 'src/app/Interfaces/ticker-result';
 import { StockDataService } from 'src/app/Services/Stock-Data/stock-data.service';
 
 @Component({
@@ -16,9 +13,6 @@ export class StockCardGeneratorComponent implements OnInit {
   value = 'Ex: MSFT';
   stockCards: StockCardDetails[];
   tickerDetails: StockCardDetails;
-  tickerInfo: TickerResult;
-  dailyTickerValue: DailyOpenCloseDetails;
-  companyInfo: TickerDetails;
 
   constructor(private api: StockDataService) {}
 
@@ -43,10 +37,7 @@ export class StockCardGeneratorComponent implements OnInit {
         this.tickerDetails.ticker_result = result[1].results[0];
         this.tickerDetails.ticker_details = result[2];
         this.stockCards.push(Object.assign({},this.tickerDetails));
-        console.log("in call " + JSON.stringify(this.tickerDetails));
-        console.log("in call array is " + this.stockCards);
       });
-      //console.log("in call array is " + this.stockCards);
     }
     else {
       openClose = this.api.getStockOpenCloseData(tickerSymbol);
@@ -57,8 +48,7 @@ export class StockCardGeneratorComponent implements OnInit {
         this.tickerDetails.daily_open_close_details = result[0];
         this.tickerDetails.ticker_result = result[1].results[0];
         this.tickerDetails.ticker_details = result[2];
-        this.stockCards.push(this.tickerDetails);
-        console.log("in call 2 " + this.stockCards[0].ticker_result);
+        this.stockCards.push(Object.assign({},this.tickerDetails));
       });
     }
   }
