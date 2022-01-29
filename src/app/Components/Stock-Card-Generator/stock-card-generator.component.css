@@ -1,7 +1,10 @@
+.generator-component-container {
+  display: block;
+}
 .ticker-field {
   width: 200px;
 }
 .mat-ticker {
-  background-color: #c2d1c9;
-  color: white;
+  background-color: #2099d1;
+  color: #20d1c2;
 }

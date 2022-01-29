@@ -1,17 +1,20 @@
-<mat-form-field class="ticker-field" appearance="fill">
-  <mat-label>Enter A Ticker Symbol</mat-label>
-  <input matInput type="text" [(ngModel)]="value">
-  <button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
-    <mat-icon>close</mat-icon>
-  </button>
-</mat-form-field>
+<div class="generator-component-container">
+  <mat-form-field class="ticker-field" appearance="fill">
+    <mat-label>Enter A Ticker Symbol</mat-label>
+    <input matInput type="text" [(ngModel)]="value">
+    <button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-form-field>
 
-<button [disabled]="!value" (click)="generateStockCard(value)" mat-raised-button color="ticker">Get Stock Info</button>
-<br/>
-<div>
-  <div fxLayout="row wrap" fxLayoutGap="16px grid">
-    <div fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let stockCard of stockCards">
-      <stock-info-card [stockCardDetails]="stockCard"></stock-info-card>
+  <button [disabled]="!value" (click)="generateStockCard(value)" mat-raised-button color="ticker">Get Stock Info</button>
+  <br/>
+  <div>
+    <div fxLayout="row wrap" fxLayoutGap="16px grid">
+      <div fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let stockCard of stockCards">
+        <stock-info-card [stockCardDetails]="stockCard"></stock-info-card>
+      </div>
     </div>
   </div>
 </div>
+

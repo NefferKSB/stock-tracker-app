@@ -1,0 +1,47 @@
+<div>
+  <mat-toolbar [ngClass]="{'nav-menu-scroll': isScrolled}">
+    <mat-toolbar-row>
+      <span>
+        <a (click)="scrollToElementId('home')">StockStack</a>
+      </span>
+      <span class="spacer"></span>
+      <div fxShow="true" fxHide.lt-md="true">
+        <ul>
+          <li class="hvr-bounce-to-bottom">
+            <a (click)="scrollToElementId('about')">Card Generator</a>
+          </li>
+          <li class="hvr-bounce-to-bottom">
+            <a (click)="scrollToElementId('experience')">Comparison Tool</a>
+          </li>
+          <li class="hvr-bounce-to-bottom">
+            <a (click)="scrollToElementId('education')">Saved Stacks</a>
+          </li>
+        </ul>
+      </div>
+      <button mat-icon-button (click)="sidenav.toggle()" fxShow="true" fxHide.gt-sm [disableRipple]="true">
+        <mat-icon>menu</mat-icon>
+      </button>
+    </mat-toolbar-row>
+  </mat-toolbar>
+
+  <mat-sidenav-container fxFlexFill>
+    <mat-sidenav #sidenav position="end" fixedInViewport="true" [fixedTopGap]="menuOffset">
+      <mat-nav-list>
+        <a mat-list-item (click)="scrollToElementId('about')">About</a>
+        <a mat-list-item (click)="scrollToElementId('experience')">Experience</a>
+        <a mat-list-item (click)="scrollToElementId('education')">Education</a>
+        <a mat-list-item (click)="scrollToElementId('skills')">Skills</a>
+        <a mat-list-item (click)="scrollToElementId('contact')">Contact</a>
+        <a mat-list-item (click)="scrollToElementId('home')">
+          <mat-icon>home</mat-icon>Back to top
+        </a>
+        <a (click)="sidenav.toggle()" mat-list-item>
+          <mat-icon>close</mat-icon> Close
+        </a>
+      </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content fxFlexFill>
+
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>
