@@ -11,6 +11,7 @@ import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 import { AppComponent } from './app.component';
 import { StocksComponent } from './Components/Stock-Table/stocks.component';
@@ -18,6 +19,7 @@ import { StockInfoCardComponent } from './Components/Stock-Card/stock-info-card.
 import { StockCardGeneratorComponent } from './Components/Stock-Card-Generator/stock-card-generator.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { NavBarComponent } from './Components/Nav-Bar/nav-bar.component';
+import { LandingPageComponent } from './Components/Landing-Page/landing-page.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,8 @@ import { NavBarComponent } from './Components/Nav-Bar/nav-bar.component';
     StocksComponent,
     StockInfoCardComponent,
     StockCardGeneratorComponent,
-    NavBarComponent
+    NavBarComponent,
+    LandingPageComponent
   ],
   imports: [
     BrowserModule,
@@ -39,6 +42,7 @@ import { NavBarComponent } from './Components/Nav-Bar/nav-bar.component';
     MatIconModule,
     MatSidenavModule,
     MatListModule,
+    DragDropModule,
     BrowserAnimationsModule,
     FlexLayoutModule
   ],
