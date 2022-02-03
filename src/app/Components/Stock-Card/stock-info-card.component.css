@@ -1,6 +1,5 @@
 .example-box {
-  width: 200px;
-  height: 200px;
+  max-width: 400px;
   padding: 10px;
   box-sizing: border-box;
   border: solid 1px #ccc;
@@ -29,15 +28,10 @@
   right: 10px;
   color: #ccc;
   cursor: move;
-  /*
-  width: 24px;
-  height: 24px;
-  */
 }
 .stock-card {
   max-width: 400px;
-  margin-top: 20px;
-  margin-bottom: 20px;
+
   padding: 0px;
 }
 .stock-card-h3 {

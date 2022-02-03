@@ -1,29 +1,31 @@
-<div class="example-box" cdkDrag>
-  <mat-card *ngIf="stockCardDetails.ticker_result.name != undefined" class="stock-card">
-    <mat-card-header class="card-header">
-      <mat-card-title>{{stockCardDetails.ticker_result.name}}</mat-card-title>
-      <mat-card-subtitle>{{stockCardDetails.ticker_result.ticker}}</mat-card-subtitle>
-      <img class="card-avatar" mat-card-avatar src={{stockCardDetails.ticker_details.logo}}>
-    </mat-card-header>
-    <mat-card-content class="card-content">
-      <h3 class="stock-card-h3">Daily Open/Close Value:</h3>
-      <p>
-        {{stockCardDetails.ticker_result.name}}'s daily open stock value was: {{stockCardDetails.daily_open_close_details.open}} USD,
-        while it's daily close stock value was: {{stockCardDetails.daily_open_close_details.close}} USD.
-      </p>
-      <h3 class="stock-card-h3">Company Info:</h3>
-      <p>{{stockCardDetails.ticker_details.description}}</p>
-      <h3 class="stock-card-h3">Sector / Industry:</h3>
-      <p>{{stockCardDetails.ticker_details.sector}} - {{stockCardDetails.ticker_details.industry}}</p>
-      <h3 class="stock-card-h3">Company Website:</h3>
-      <p><a href={{stockCardDetails.ticker_details.url}}>{{stockCardDetails.ticker_details.url}}</a></p>
-    </mat-card-content>
-  </mat-card>
+<div class="example-boundary">
+  <div class="example-box" cdkDragBoundary=".example-boundary" cdkDrag>
+    <mat-card *ngIf="stockCardDetails.ticker_result.name != undefined" class="stock-card">
+      <mat-card-header class="card-header">
+        <mat-card-title>{{stockCardDetails.ticker_result.name}}</mat-card-title>
+        <mat-card-subtitle>{{stockCardDetails.ticker_result.ticker}}</mat-card-subtitle>
+        <img class="card-avatar" mat-card-avatar src={{stockCardDetails.ticker_details.logo}}>
+      </mat-card-header>
+      <mat-card-content class="card-content">
+        <h3 class="stock-card-h3">Daily Open/Close Value:</h3>
+        <p>
+          {{stockCardDetails.ticker_result.name}}'s daily open stock value was: {{stockCardDetails.daily_open_close_details.open}} USD,
+          while it's daily close stock value was: {{stockCardDetails.daily_open_close_details.close}} USD.
+        </p>
+        <h3 class="stock-card-h3">Company Info:</h3>
+        <p>{{stockCardDetails.ticker_details.description}}</p>
+        <h3 class="stock-card-h3">Sector / Industry:</h3>
+        <p>{{stockCardDetails.ticker_details.sector}} - {{stockCardDetails.ticker_details.industry}}</p>
+        <h3 class="stock-card-h3">Company Website:</h3>
+        <p><a href={{stockCardDetails.ticker_details.url}}>{{stockCardDetails.ticker_details.url}}</a></p>
+      </mat-card-content>
+    </mat-card>
 
-  <div class="example-handle" cdkDragHandle>
-    <svg width="24px" fill="currentColor" viewBox="0 0 24 24">
-      <path d="M10 9h4V6h3l-5-5-5 5h3v3zm-1 1H6V7l-5 5 5 5v-3h3v-4zm14 2l-5-5v3h-3v4h3v3l5-5zm-9 3h-4v3H7l5 5 5-5h-3v-3z"></path>
-      <path d="M0 0h24v24H0z" fill="none"></path>
-    </svg>
+    <div class="example-handle" cdkDragHandle>
+      <svg width="24px" fill="currentColor" viewBox="0 0 24 24">
+        <path d="M10 9h4V6h3l-5-5-5 5h3v3zm-1 1H6V7l-5 5 5 5v-3h3v-4zm14 2l-5-5v3h-3v4h3v3l5-5zm-9 3h-4v3H7l5 5 5-5h-3v-3z"></path>
+        <path d="M0 0h24v24H0z" fill="none"></path>
+      </svg>
+    </div>
   </div>
 </div>

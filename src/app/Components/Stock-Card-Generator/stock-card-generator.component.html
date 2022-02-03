@@ -11,7 +11,8 @@
   <br/>
   <div>
     <div fxLayout="row wrap" fxLayoutGap="16px grid">
-      <div fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let stockCard of stockCards">
+      <!-- fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="33%" -->
+      <div *ngFor="let stockCard of stockCards">
         <stock-info-card [stockCardDetails]="stockCard"></stock-info-card>
       </div>
     </div>
